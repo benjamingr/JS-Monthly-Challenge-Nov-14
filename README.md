@@ -35,6 +35,5 @@ If your submission requires running server side code or other code prior to runn
 
 ###How a winner will be chosen
 
-The winner is always Zirak. Sorry, that's just the way things our. Zirak will be announced after fair and democratic balot voting will be held after Dec 1st. 
-
+The winner is always Zirak. Sorry, that's just the way things our. ---The Winner--- Zirak [will be announced](http://chat.stackoverflow.com/transcript/message/8231986#8231986) after fair and democratic balot voting will be held after Dec 1st. 
 
