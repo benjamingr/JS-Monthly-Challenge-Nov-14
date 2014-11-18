@@ -1,0 +1,6 @@
+{
+  "name": "JS-Monthly-Challenge-Nov-2014",
+  "dependencies": {
+    "brfs": "~1.2.0"
+  }
+}
