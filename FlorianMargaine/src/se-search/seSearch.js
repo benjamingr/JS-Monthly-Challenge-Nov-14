@@ -15,7 +15,6 @@ function search(form) {
 
 function createQuestion(question) {
     ee.emit('create', question);
-    console.log(question);
 }
 
 function findQuestions(search) {
