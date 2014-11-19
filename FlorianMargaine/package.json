@@ -1,0 +1,12 @@
+{
+  "name": "JS-Monthly-Challenge-Nov-2014",
+  "devDependencies": {
+    "browserify": "~6.3.2",
+    "brfs": "~1.2.0",
+    "uglify-js2": "~2.1.11"
+  },
+  "dependencies": {
+    "bluebird": "~2.3.11",
+    "event-emitter": "~0.3.1"
+  }
+}
