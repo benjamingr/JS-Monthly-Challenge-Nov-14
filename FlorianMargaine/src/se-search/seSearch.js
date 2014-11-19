@@ -17,9 +17,9 @@ function createQuestion(question) {
 }
 
 function findQuestions(search) {
-    return getJSON(makeUrl(search)).then(function(obj) {
-        return obj.currentTarget.response.items; // wut?
-    });
+    // no idea why .get('items') doesn't work right away.
+    // it seems I get an XMLHttpRequestProgressEvent object...
+    return getJSON(makeUrl(search)).get('currentTarget').get('response').get('items');
 }
 
 function makeUrl(search) {
