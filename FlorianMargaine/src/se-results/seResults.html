@@ -1,2 +1,6 @@
-<div class="results">
+<div class="results" data-bind="foreach: questions">
+  <div class="question">
+    <div class="title" data-bind="text: title"></div>
+    <div class="excerpt" data-bind="html: excerpt"></div>
+  </div>
 </div>

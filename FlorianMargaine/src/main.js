@@ -1,6 +1,11 @@
 'use strict';
 
 var fs = require('fs');
+var ee = require('event-emitter');
+
+module.exports = {
+    ee: ee({})
+};
 
 ko.components.register('se-search', {
     viewModel: require('./se-search/seSearch'),

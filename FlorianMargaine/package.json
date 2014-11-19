@@ -6,6 +6,7 @@
     "uglify-js2": "~2.1.11"
   },
   "dependencies": {
-    "bluebird": "~2.3.11"
+    "bluebird": "~2.3.11",
+    "event-emitter": "~0.3.1"
   }
 }

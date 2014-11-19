@@ -7,12 +7,14 @@ module.exports = function() {
 };
 
 var getJSON = require('../http').getJSON;
+var ee = require('../main').ee;
 
 function search(form) {
     findQuestions(form.search.value).map(createQuestion).done();
 }
 
 function createQuestion(question) {
+    ee.emit('create', question);
     console.log(question);
 }
 
