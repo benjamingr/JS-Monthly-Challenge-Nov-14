@@ -10,8 +10,13 @@ module.exports = function() {
             method: "notifyWhenChangesStop"
         }
     });
+
     ee.on('create', function(question) {
         questions.push(question);
+    });
+
+    ee.on('clear', function() {
+        questions([]);
     });
 
     return {

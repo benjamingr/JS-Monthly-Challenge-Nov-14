@@ -9,8 +9,24 @@ module.exports = function() {
 var getJSON = require('../http').getJSON;
 var ee = require('../main').ee;
 
+var timeoutId = 0;
+
 function search(form) {
     findQuestions(form.search.value).map(createQuestion).done();
+
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = 0;
+    }
+
+    setTimeout(function() {
+        clearQuestions();
+        search(form);
+    }, 1000 * 60);
+}
+
+function clearQuestions() {
+    ee.emit('clear');
 }
 
 function createQuestion(question) {
