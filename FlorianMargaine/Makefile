@@ -1,5 +1,5 @@
 all:
-	browserify -t brfs src/main.js | uglifyjs -mc > bundle.js
+	./node_modules/.bin/browserify -t brfs src/main.js | ./node_modules/.bin/uglifyjs2 -mc > bundle.js
 
 debug:
-	browserify -t brfs -d src/main.js > bundle.js
+	./node_modules/.bin/browserify -t brfs -d src/main.js > bundle.js
