@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Madara Uchiha - Challenge Implementation</title>
+    <script src='http://knockoutjs.com/downloads/knockout-3.2.0.js'></script>
+</head>
+<body>
+<form data-bind="submit: searchQuestions">
+    <input type="text" data-bind="value: searchTerms, valueUpdate: 'input'"/>
+    <span data-bind="visible: searchTerms().length < minLength">Please enter <strong data-bind="text: minLength - searchTerms().length"></strong> more characters</span>
+    <div><button>Go</button></div>
+</form>
+<ul data-bind="foreach: questions">
+    <li><a data-bind="attr: { href: url }, text: title"></a></li>
+</ul>
+
+<script>
+    //Because I like being fancy. Shut up.
+    function Question(id, title) {
+        this.id = id;
+        this.url = 'https://stackoverflow.com/questions/' + id;
+        this.title = title;
+    }
+    function QuestionsViewModel() {
+        // Constants
+        this.minLength = 3;
+
+        // Data
+        this.questions = ko.observableArray([]);
+        this.searchTerms = ko.observable('');
+
+        //Actions
+        this.searchQuestions = function searchQuestions() {
+            var searchUrl = 'http://api.stackexchange.com/2.2/search/excerpts?site=stackoverflow&body=',
+                xhr = new XMLHttpRequest();
+
+            xhr.open('get', searchUrl + this.searchTerms());
+            xhr.onload = function handleResults() {
+                var data = JSON.parse(xhr.responseText);
+                data = data.items.map(function mapResultsToQuestionObjects(item) {
+                    return new Question(item.question_id, item.title);
+                });
+                this.questions(data);
+            }.bind(this);
+
+            xhr.send();
+        }.bind(this);
+    }
+
+    ko.applyBindings(new QuestionsViewModel());
+</script>
+
+</body>
+</html>
