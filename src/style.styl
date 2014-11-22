@@ -1,0 +1,45 @@
+badass-rounding(length)
+    width unit(length, px)
+    height unit(length, px)
+    border-radius unit(length / 2, px)
+
+.post
+    width 70%
+    margin 10px auto
+    padding 10px
+    border-radius 10px
+
+    font-family sans-serif
+
+    background aliceblue
+
+    word-wrap break-word
+
+.post .title
+    text-align center
+
+.post .avatar
+    badass-rounding(80)
+    float right
+
+.post .vote-count
+    badass-rounding(80)
+
+    line-height 80px
+    text-align center
+    vertical-align middle
+
+    font-size 40px
+
+    float left
+
+.post .vote-count.good
+    background green
+.post .vote-count.neutral
+    background #aaa
+.post .vote-count.bad
+    background brown
+
+.clearfix
+    float none
+    visibility hidden
