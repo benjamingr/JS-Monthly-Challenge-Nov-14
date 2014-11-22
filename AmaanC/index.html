@@ -1,6 +1,7 @@
 <!-- THE GAME! -->
 <html>
 <head>
+    <link rel='stylesheet' type='text/css' href='styles.css'>
     <title>AmaanC's submission</title>
 </head>
 <body>
@@ -9,18 +10,31 @@
         <input placeholder='Search..' data-bind='value: input'/>
         <input type='submit'/>
     </form>
-    <ul data-bind='foreach: results'>
-        <li>
-            <a data-bind='attr: { href: href }'>
-                <span data-bind='text: title'></span>
-            </a>
-        </li>
-    </ul>
+    
+    <div data-bind='foreach: results'>
+        <div class='question-summary search-result'>
+            <div class='statscontainer'>
+                <span class='vote-count-post'><strong data-bind='text: score'></strong></span>
+                <div class='viewcount'>votes</div>
+            </div>
+
+            <div class='summary'>
+                <div class='result-link'>
+        <a data-bind='attr: { href: href }'>
+            <span data-bind='text: title'></span>
+        </a>
+                </div>
+                <div class='excerpt' data-bind='text: excerpt'>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div data-bind='visible: !results().length'>No results</div>
 
     <script type='text/javascript' src='knockout-3.2.0.js'></script>
     <script type='text/javascript'>
-        var REFRESH_INTERVAL = 60;
+        var REFRESH_INTERVAL = 100000;
         var url = 'http://api.stackexchange.com/2.2/search/excerpts?order=desc&sort=activity&site=stackoverflow&body=';
         var search = function(query) {
             var promise = new Promise(function(resolve, reject) {
