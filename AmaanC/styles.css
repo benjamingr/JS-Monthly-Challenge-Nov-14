@@ -1,0 +1,30 @@
+.question-summary {
+    border-bottom: 1px solid #eaeaea;
+    overflow: hidden;
+    padding: 11px 0;
+    width: 730px;
+    float: left;
+}
+
+.statscontainer {
+    width: 86px;
+    float: left;
+    margin-right: 8px;
+    text-align: center;
+    margin: 0 0 0 7px;
+    padding: 4px 7px 6px 7px;
+}
+
+.search-results .question-summary .summary {
+    float: none;
+    width: auto;
+    margin: 0 0 0 88px;
+    padding: 0 6px;
+}
+
+.excerpt {
+    max-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
