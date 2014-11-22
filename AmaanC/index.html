@@ -1,0 +1,68 @@
+<!-- THE GAME! -->
+<html>
+<head>
+    <title>AmaanC's submission</title>
+</head>
+<body>
+
+    <form data-bind='submit: findQuestions'>
+        <input placeholder='Search..' data-bind='value: input'/>
+        <input type='submit'/>
+    </form>
+    <ul data-bind='foreach: results'>
+        <li>
+            <a data-bind='attr: { href: href }'>
+                <span data-bind='text: title'></span>
+            </a>
+        </li>
+    </ul>
+    <div data-bind='visible: !results().length'>No results</div>
+
+    <script type='text/javascript' src='knockout-3.2.0.js'></script>
+    <script type='text/javascript'>
+        var REFRESH_INTERVAL = 60;
+        var url = 'http://api.stackexchange.com/2.2/search/excerpts?order=desc&sort=activity&site=stackoverflow&body=';
+        var search = function(query) {
+            var promise = new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url + query);
+                xhr.onload = function() {
+                    resolve(JSON.parse(xhr.responseText));
+                    console.log('XHR onload', xhr.status);
+                };
+                xhr.send();
+            });
+            return promise;
+        };
+
+        var ViewModel = function() {
+            var self = this;
+            self.input = ko.observable('');
+            self.results = ko.observableArray([]);
+            self.findQuestions = function() {
+                console.log('Searching for', self.input());
+                search(self.input()).
+                then(function(response) {
+                    console.log('Number of results', response.items.length);
+                    response.items.forEach(function(item) {
+                        item.href = 'https://www.stackoverflow.com/questions/' + item.question_id;
+                    });
+                    self.results(response.items);
+                    return self.input();
+                }).
+                then(function(oldInput) {
+                    setTimeout(function() {
+                        // If the input is the same, refresh
+                        if (self.input() === oldInput) {
+                            console.log('Refreshed');
+                            self.findQuestions();
+                        }
+                    }, REFRESH_INTERVAL * 1000);
+                });
+            };
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>
