@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head><title>Benjamin Gruenbaum</title></head>
+<head><title>Benjamin Gruenbaum - Plain JS Implementation</title></head>
 <body>
-	Nothing to see here... <span data-bind='text: message'></span>
-
+	<input type='text' data-bind="textInput: searchTerm" placeholder="Enter Search Term" />
+	<ul data-bind="foreach: questions">
+		<li>
+			Hi 
+			<a data-bind="attr: { href: url }">
+				<span data-bind='text: title' />
+			</a>
+			
+		</li>
+	</ul>
 	<script src='http://knockoutjs.com/downloads/knockout-3.2.0.js'></script>
 	<script>
-		var vm = {message:'yet'};
-		ko.applyBindings(vm);
+	var apiUrl = "http://api.stackexchange.com/2.2/";
+	var searchUrl = apiUrl+"search/excerpts?order=desc&sort=activity&site=stackoverflow&body=";
+	function ViewModel(){
+		console.log("Made VM");
+		this.searchTerm = ko.observable("");
+		this.questions = ko.observableArray([]);
+		this.searchTerm.
+			extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } }).
+			subscribe(function(){
+			console.log("Making request");
+			var xhr = new XMLHttpRequest;
+			var term = this.searchTerm();
+			if(term.length < 3) return;
+			xhr.open("GET", searchUrl + term);
+			xhr.onload = function(){
+				var result = JSON.parse(xhr.responseText);
+				result.items.forEach(function(item){
+					item.url = 'http://www.stackoverflow.com/questions/' + item.question_id;
+				})
+				this.questions(result.items);
+			}.bind(this);
+			xhr.send();
+		}.bind(this));
+	}
+	window.vm = new ViewModel();
+	ko.applyBindings(window.vm);
 	</script>
 </body>
 </html>
