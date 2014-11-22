@@ -2,40 +2,40 @@
 <html>
 <head><title>Benjamin Gruenbaum - Plain JS Implementation</title></head>
 <body>
-	<input type='text' data-bind="textInput: searchTerm" placeholder="Enter Search Term" />
-	<ul data-bind="foreach: questions">
-		<li><a data-bind="attr: { href: url }"><span data-bind='text: title' /></a></li>
-	</ul>
-	<script src='http://knockoutjs.com/downloads/knockout-3.2.0.js'></script>
-	<script>
+  <input type='text' data-bind="textInput: searchTerm" placeholder="Enter Search Term" />
+  <ul data-bind="foreach: questions">
+    <li><a data-bind="attr: { href: url }"><span data-bind='text: title' /></a></li>
+  </ul>
+  <script src='http://knockoutjs.com/downloads/knockout-3.2.0.js'></script>
+  <script>
 
-	function ViewModel(){
-		this.searchTerm = ko.observable("");
-		this.questions = ko.observableArray([]);
-		this.searchTerm.
-			extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } }).
-			subscribe(function(term){
-				search(term).then(function(items){
-					items.forEach(function(item){
-						item.url = 'http://www.stackoverflow.com/questions/' + item.question_id;
-					});
-					return items;
-				}).then(this.questions);
-			}.bind(this));
-	}
-	ko.applyBindings(new ViewModel());
+  function ViewModel(){
+    this.searchTerm = ko.observable("");
+    this.questions = ko.observableArray([]);
+    this.searchTerm.
+      extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } }).
+      subscribe(function(term){
+        search(term).then(function(items){
+          items.forEach(function(item){
+            item.url = 'http://www.stackoverflow.com/questions/' + item.question_id;
+          });
+          return items;
+	    }).then(this.questions);
+      }.bind(this));
+  }
+  ko.applyBindings(new ViewModel());
 
-	function search(term){
-		var api = "http://api.stackexchange.com/2.2/search/excerpts?site=stackoverflow&body=";
-		return new Promise(function(resolve, reject){
-			if(term.length < 3) return resolve([]);
-			var xhr = new XMLHttpRequest;
-			xhr.open("GET", api + term);
-			xhr.onload = function(){ resolve(JSON.parse(xhr.responseText).items); };
-			xhr.onerror = reject;
-			xhr.send();
-		});
-	}
-	</script>
+  function search(term){
+    var api = "http://api.stackexchange.com/2.2/search/excerpts?site=stackoverflow&body=";
+    return new Promise(function(resolve, reject){
+      if(term.length < 3) return resolve([]);
+      var xhr = new XMLHttpRequest;
+      xhr.open("GET", api + term);
+      xhr.onload = function(){ resolve(JSON.parse(xhr.responseText).items); };
+      xhr.onerror = reject;
+      xhr.send();
+    });
+  }
+  </script>
 </body>
 </html>
