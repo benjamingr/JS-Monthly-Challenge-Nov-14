@@ -1,0 +1,6 @@
+(def QuestionListModel (questionStream)
+	(defhash list
+		questions (ko.observableArray []))
+	(questionStream.subscribe (lambda (question)
+		(list.questions.push (QuestionModel question))))
+	list)
