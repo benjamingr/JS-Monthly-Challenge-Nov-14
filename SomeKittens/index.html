@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body>
+<input data-bind="value: query"/>
+<button data-bind="click: submit">submit</button>
+<div data-bind="foreach: questions">
+    <h3 data-bind="text: title"></h3>
+    <div data-bind="text: body"></div>
+</div>
+<script>
+function A() {
+    var self = this;
+    self.query = ko.observable('');
+    self.questions = ko.observableArray([]);
+    self.submit = function () {
+        $.get('http://api.stackexchange.com/2.2/search/excerpts?order=desc&sort=activity&site=stackoverflow&body=' + self.query())
+        .done(function (results) {
+          self.questions(results.items);
+        });
+    };
+}
+
+ko.applyBindings(new A());
+</script>
+</body>
+</html>
