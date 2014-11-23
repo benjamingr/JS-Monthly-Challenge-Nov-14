@@ -22,7 +22,7 @@
         <a data-bind='attr: { href: link }'>
             <h2 data-bind='text: title' class='title'></h2>
         </a>
-        <pre data-bind='html: body' class='body'></pre>
+        <pre data-bind='text: body' class='body'></pre>
     </section>
 </div>
 
@@ -36,7 +36,6 @@
 <script src='dist/totally-not-konami.js'></script>
 
 <script>
-    // TODO actually do something
     var postStream = new Rx.Observable.create(function (observer) {
         ko.applyBindings(
             SearchModel(observer),
