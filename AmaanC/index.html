@@ -34,7 +34,7 @@
 
     <script type='text/javascript' src='knockout-3.2.0.js'></script>
     <script type='text/javascript'>
-        var REFRESH_INTERVAL = 100000;
+        var REFRESH_INTERVAL = 60;
         var url = 'http://api.stackexchange.com/2.2/search/excerpts?order=desc&sort=activity&site=stackoverflow&body=';
         var search = function(query) {
             var promise = new Promise(function(resolve, reject) {
