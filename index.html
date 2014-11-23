@@ -7,11 +7,10 @@
 <body>
 
 <form name='searchForm' onsubmit='return false'>
-    <input name='doubt' placeholder='What is your doubt?' />
-    <input type='submit' value='halp' />
+    <input placeholder='What is your doubt?' data-bind='textInput: doubt' />
 </form>
 
-<div data-bind='foreach: questions'>
+<div data-bind='foreach: questions' id='questionList'>
     <section class='post'>
         <img data-bind='attr: { src: owner.profile_image }' class='avatar' />
         <span data-bind='text: score, css: postQuality' class='vote-count'></span>
@@ -28,6 +27,7 @@
 
 <script src='dist/QuestionListModel.js'></script>
 <script src='dist/QuestionModel.js'></script>
+<script src='dist/SearchModel.js'></script>
 
 <script src='dist/totally-not-konami.js'></script>
 
@@ -36,7 +36,19 @@
     // TODO actually do something
     var postStream = new Rx.Observable.fromArray(POSTS);
 
-    ko.applyBindings(QuestionListModel(postStream));
+    var questionStream = postStream.filter(function (post) {
+        return post.item_type === 'question';
+    });
+
+    ko.applyBindings(
+        SearchModel(/*...*/),
+        document.forms.searchForm
+    );
+
+    ko.applyBindings(
+        QuestionListModel(postStream),
+        document.getElementById('questionList')
+    );
 </script>
 </body>
 </html>

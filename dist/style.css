@@ -1,3 +1,14 @@
+form[name='searchForm'] {
+  height: 100px;
+  text-align: center;
+}
+form[name='searchForm'] input {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid #f0f8ff;
+  padding: 6px;
+}
 .post {
   width: 70%;
   margin: 10px auto;

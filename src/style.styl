@@ -1,3 +1,19 @@
+// form
+
+form[name='searchForm']
+    height 100px
+    text-align center
+
+    input
+        position relative
+        top 50%
+        transform translateY(-50%)
+
+        border 2px solid aliceblue
+
+        padding 6px
+
+// post
 badass-rounding(length)
     width unit(length, px)
     height unit(length, px)
@@ -15,30 +31,30 @@ badass-rounding(length)
 
     word-wrap break-word
 
-.post .title
-    text-align center
+    .title
+        text-align center
 
-.post .avatar
-    badass-rounding(80)
-    float right
+    .avatar
+        badass-rounding(80)
+        float right
 
-.post .vote-count
-    badass-rounding(80)
+    .vote-count
+        badass-rounding(80)
 
-    line-height 80px
-    text-align center
-    vertical-align middle
+        line-height 80px
+        text-align center
+        vertical-align middle
 
-    font-size 40px
+        font-size 40px
 
-    float left
+        float left
 
-.post .vote-count.good
-    background green
-.post .vote-count.neutral
-    background #aaa
-.post .vote-count.bad
-    background brown
+    .vote-count.good
+        background green
+    .vote-count.neutral
+        background #aaa
+    .vote-count.bad
+        background brown
 
 .clearfix
     float none
