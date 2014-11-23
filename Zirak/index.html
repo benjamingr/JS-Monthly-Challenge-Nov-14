@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Does anyone even read this?</title>
+    <link href='dist/style.css' rel='stylesheet' />
+</head>
+<body>
+
+<form name='searchForm' onsubmit='return false'>
+    <input placeholder='What is your doubt?' data-bind='textInput: doubt' />
+</form>
+
+<div data-bind='foreach: questions' id='questionList'>
+    <section class='post'>
+        <a data-bind='attr: { href: owner.link, title: owner.display_name }'>
+            <img data-bind='attr: { src: owner.profile_image }' class='avatar' />
+        </a>
+        <span data-bind='text: score, css: postQuality' class='vote-count'></span>
+
+        <div class='clearfix'>lulz</div>
+
+        <a data-bind='attr: { href: link }'>
+            <h2 data-bind='text: title' class='title'></h2>
+        </a>
+        <pre data-bind='text: body' class='body'></pre>
+    </section>
+</div>
+
+<script src='dist/rx.js'></script>
+<script src='dist/knockout.js'></script>
+
+<script src='dist/QuestionListModel.js'></script>
+<script src='dist/QuestionModel.js'></script>
+<script src='dist/SearchModel.js'></script>
+
+<script src='dist/totally-not-konami.js'></script>
+
+<script>
+    var postStream = new Rx.Observable.create(function (observer) {
+        ko.applyBindings(
+            SearchModel(observer),
+            document.forms.searchForm
+        );
+    });
+
+    var questionStream = postStream.filter(function (post) {
+        return post.item_type === 'question';
+    });
+
+    ko.applyBindings(
+        QuestionListModel(postStream),
+        document.getElementById('questionList')
+    );
+</script>
+</body>
+</html>
