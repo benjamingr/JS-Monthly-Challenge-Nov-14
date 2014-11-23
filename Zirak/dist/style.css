@@ -1,0 +1,52 @@
+form[name='searchForm'] {
+  height: 100px;
+  text-align: center;
+}
+form[name='searchForm'] input {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid #f0f8ff;
+  padding: 6px;
+}
+.post {
+  width: 70%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: sans-serif;
+  background: #f0f8ff;
+  word-wrap: break-word;
+}
+.post .title {
+  text-align: center;
+}
+.post .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  float: right;
+}
+.post .vote-count {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  line-height: 80px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 40px;
+  float: left;
+}
+.post .vote-count.good {
+  background: #008000;
+}
+.post .vote-count.neutral {
+  background: #aaa;
+}
+.post .vote-count.bad {
+  background: #a52a2a;
+}
+.clearfix {
+  float: none;
+  visibility: hidden;
+}
