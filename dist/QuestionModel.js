@@ -6,6 +6,7 @@ Object.keys(questionObject)
 .forEach(veryUppercase);
 
 question.postQuality = ko.computed(veryQuestionScore);
+question.link = ko.computed(veryLink);
 
 function veryQuestionScore () { 
 if (question.score  > 7 ) {
@@ -15,8 +16,11 @@ if (question.score  > 7 ) {
 } else {
             rating = 'bad'
 } 
-
 return rating;
+} 
+
+function veryLink () { 
+return 'https://stackoverflow.com/q/' + question.questionId;
 } 
 
 function veryUppercase (key) { 

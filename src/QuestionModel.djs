@@ -6,6 +6,7 @@ such QuestionModel much questionObject
         dose forEach with veryUppercase
 
     question.postQuality is plz ko.computed with veryQuestionScore
+    question.link is plz ko.computed with veryLink
 
     such veryQuestionScore
         rly question.score bigger 7
@@ -16,6 +17,9 @@ such QuestionModel much questionObject
             rating = 'bad'
         wow
     wow rating
+
+    such veryLink
+    wow 'https://stackoverflow.com/q/' + question.questionId
 
     such veryUppercase much key
         very saneKey is plz key.replace with /_(.)/g, uppercaseKey
