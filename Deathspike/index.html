@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <title>Roel van Uden (Deathspike)</title>
+        <style>body { margin: 10px 0; overflow-y: scroll; }</style>
+    </head>
+    <body>
+        <div class="container" style="display: none" data-bind="visible: true">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">></div>
+                    <input class="form-control" type="text" data-bind="textInput: input" />
+                </div>
+            </div>
+            <div data-bind="foreach: results">
+                <div>
+                    <h3 data-bind="text: title"></h3>
+                    <p data-bind="text: excerpt"></p>
+                    <a class="btn btn-default" target="_blank" data-bind="attr: {href: 'http://www.stackoverflow.com/questions/' + question_id}">View details »</a>
+                </div>
+            </div>
+        </div>
+        <script src="http://knockoutjs.com/downloads/knockout-3.2.0.js"></script>
+        <script>
+            (function () {
+                'use strict';
+
+                function decode(value) {
+                    value = value.replace(/&amp;/g, '&')
+                        .replace(/&lt;/g, '<')
+                        .replace(/&gt;/g, '>')
+                        .replace(/&quot;/g, '"')
+                        .replace(/&hellip;/g, '»');
+                    return value.replace(/&#([0-9]{2,3});/g, function (match, oct) {
+                        return String.fromCharCode(parseInt(oct, 10));
+                    });
+                }
+
+                function fillQuestions(viewModel, input) {
+                    requestQuestions(input, function (err, results) {
+                        if (err) return alert(err);
+                        results.forEach(function (result) {
+                            result.excerpt = decode(result.excerpt);
+                            result.title = decode(result.title);
+                        });
+                        viewModel.results(results);
+                    });
+                }
+
+                function requestQuestions(input, fn) {
+                    var apiUrl = 'http://api.stackexchange.com/2.2/search/excerpts?site=stackoverflow&body=';
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', apiUrl + (input || ''));
+                    xhr.onerror = fn;
+                    xhr.onload = function () {
+                        fn(undefined, JSON.parse(xhr.responseText).items);
+                    };
+                    xhr.send();
+                }
+
+                function ViewModel() {
+                    var that = this;
+                    this.input = ko.observable('asd').extend({rateLimit: {method: 'notifyWhenChangesStop', timeout: 500}});
+                    this.results = ko.observableArray();
+                    this.input.subscribe(function (input) {
+                        fillQuestions(that, input);
+                    });
+                    fillQuestions(that);
+                }
+
+                ko.applyBindings(new ViewModel());
+            })();
+        </script>
+    </body>
+</html>
