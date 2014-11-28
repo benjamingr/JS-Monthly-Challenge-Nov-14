@@ -1,0 +1,8 @@
+{
+  "name": "Nov-JS-Retsam",
+  "version": "0.0.0",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-typescript": "^2.3.0"
+  }
+}
