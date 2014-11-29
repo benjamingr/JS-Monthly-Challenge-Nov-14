@@ -1,4 +1,7 @@
-///<reference path="knockout.d.ts"/>
+///<reference path="dts/knockout.d.ts"/>
+///<reference path="dts/lodash.d.ts"/>
+///<reference path="dts/bluebird.d.ts"/>
+
 var vm = (function (ko : KnockoutStatic, SearchView, ResultsView, searchController : SearchController) {
 
     var vm = {
