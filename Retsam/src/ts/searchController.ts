@@ -1,4 +1,15 @@
-var searchController = (function (ko) {
+///<reference path="knockout.d.ts"/>
+
+interface SearchController {
+    foo(s: string): boolean;
+}
+    
+var searchController = (function (ko: KnockoutStatic) {
     "use strict";
-    return {};
+
+    return {
+        foo: function (s ) {
+            return true;
+        }
+    };
 }(ko));

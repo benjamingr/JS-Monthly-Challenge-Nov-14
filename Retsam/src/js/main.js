@@ -1,3 +1,4 @@
+///<reference path="knockout.d.ts"/>
 var vm = (function (ko, SearchView, ResultsView, searchController) {
     var vm = {
         searchView: new SearchView(searchController),

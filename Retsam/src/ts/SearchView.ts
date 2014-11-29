@@ -1,4 +1,6 @@
-var SearchView = (function (ko) {
+///<reference path="knockout.d.ts"/>
+
+var SearchView = (function (ko : KnockoutStatic) {
     "use strict";
 
     function SearchView(searchController) {

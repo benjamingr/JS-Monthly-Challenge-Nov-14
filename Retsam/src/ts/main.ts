@@ -1,4 +1,5 @@
-var vm = (function (ko, SearchView, ResultsView, searchController) {
+///<reference path="knockout.d.ts"/>
+var vm = (function (ko : KnockoutStatic, SearchView, ResultsView, searchController : SearchController) {
 
     var vm = {
         searchView: new SearchView(searchController),

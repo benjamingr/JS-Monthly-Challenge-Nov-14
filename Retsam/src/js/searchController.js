@@ -1,4 +1,9 @@
+///<reference path="knockout.d.ts"/>
 var searchController = (function (ko) {
     "use strict";
-    return {};
+    return {
+        foo: function (s) {
+            return true;
+        }
+    };
 }(ko));
