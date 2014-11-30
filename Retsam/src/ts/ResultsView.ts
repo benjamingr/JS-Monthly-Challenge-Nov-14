@@ -20,7 +20,7 @@ class ResultsItem {
     title: string;
     excerpt: string;
     navigate: () => void;
-    tagClicked: (string) => void;
+    tagClicked: (string, Event) => void;
     tags: string[];
 
     constructor(resultData) {
@@ -37,9 +37,10 @@ class ResultsItem {
 
         self.tags = resultData.tags;
 
-        self.tagClicked = function (tag) {
-            var url = "http://stackoverflow.com/tags/"+tag+"/info";
-            window.open(url,'_blank');
+        self.tagClicked = function (tag, event) {
+            var root = ko.contextFor(event.target).$root;
+            var searchView : SearchView = root.searchView;
+            searchView.tags.push(tag);
         }
     }
 }

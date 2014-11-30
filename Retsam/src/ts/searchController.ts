@@ -1,10 +1,12 @@
 interface SearchController {
     search(s: SearchOptions): void;
-    searchResults: KnockoutObservableArray<any>
+    searchResults: KnockoutObservableArray<any>;
+    tagExists(tag: string) : Promise<boolean>;
 }
     
 interface SearchOptions {
     text?: string
+    tags?: string[]
 }
 
 function ajaxGetAsync(url) {
@@ -22,18 +24,24 @@ var searchController = (function (ko: KnockoutStatic) {
 
     var searchController = {
         search: function (options: SearchOptions ) {
-            //*
+            /*
             var url = "http://demo2601246.mockable.io?site=stackoverflow"
             /*/
             var url = "http://api.stackexchange.com/search/excerpts?site=stackoverflow";
             //*/
 
-            if(!options.text) {
+            if(!options.text && !(options.tags && options.tags.length)) {
                 searchController.searchResults([]);
                 return;
             }
 
-            url += "&q="+encodeURIComponent(options.text);
+            if(options.text) {
+                url += "&q="+encodeURIComponent(options.text);
+            }
+
+            if(options.tags && options.tags.length) {
+                url += "&tagged="+options.tags.join(";");
+            }
 
             ajaxGetAsync(url).then(function (response : any) {
                 var results = response.items;
@@ -42,6 +50,14 @@ var searchController = (function (ko: KnockoutStatic) {
 
                 searchController.searchResults(results);
             })
+        },
+
+        tagExists: function (tag : string) {
+            var url="http://api.stackexchange.com/tags/"+tag+"/info?site=stackoverflow";
+
+            return ajaxGetAsync(url).then(function (response : any) {
+                return response.items.length > 0;
+            });
         },
 
         searchResults: ko.observableArray([])

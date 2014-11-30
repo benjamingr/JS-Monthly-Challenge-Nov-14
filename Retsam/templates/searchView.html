@@ -1,4 +1,15 @@
 <template id="searchView">
     <label for='searchText'>Search Text: </label>
     <input id='searchText' type='text' data-bind='textInput: searchText'></input>
+
+    <form class="search-view-add-tags" data-bind="submit: addTag">
+        <label for='searchTags'>Tags: </label>
+        <span class="search-view-tags" data-bind="foreach: tags">
+            <span class="tag" data-bind="
+                text: $data,
+                click: $parent.tagClicked
+            "></span>
+        </span>
+        <input id='searchTags' type='text' data-bind='textInput: newTagName' placeholder="Add Tag"></input>
+    </form>
 </template>
