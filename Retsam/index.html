@@ -24,9 +24,10 @@
     <!-- don't edit directly; templates inserted by gulp -->
     <div id="templates">        
         <template id="resultsItem">
-            <span>
-                <a data-bind="text: title, attr: {href: url}" target="_blank"></a>
-            </span>
+            <div data-bind="click: navigate">
+                <div class="results-item-title" data-bind="text: title"></div>
+                <div class="results-item-excerpt" data-bind="html: excerpt"></div>
+            </div>
         </template>
         <template id="resultsView">
             <div data-bind="foreach: results">

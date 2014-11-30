@@ -13,8 +13,12 @@ var ResultsView = (function () {
 var ResultsItem = (function () {
     function ResultsItem(resultData) {
         var self = this;
-        self.url = "http://stackoverflow.com/questions/" + resultData.question_id;
+        var url = "http://stackoverflow.com/questions/" + resultData.question_id;
         self.title = resultData.title;
+        self.excerpt = resultData.excerpt;
+        self.navigate = function () {
+            window.open(url, '_blank');
+        };
     }
     return ResultsItem;
 })();

@@ -17,13 +17,20 @@ class ResultsView {
 }
 
 class ResultsItem {
-    url: string;
     title: string;
+    excerpt: string;
+    navigate: () => void;
     constructor(resultData) {
         var self = this;
 
-        self.url = "http://stackoverflow.com/questions/"+resultData.question_id;
+        var url = "http://stackoverflow.com/questions/"+resultData.question_id;
         self.title = resultData.title;
+
+        self.excerpt = resultData.excerpt;
+
+        self.navigate = function () {
+            window.open(url,'_blank');
+        }
     }
 }
 
