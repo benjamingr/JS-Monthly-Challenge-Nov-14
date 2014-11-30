@@ -6,18 +6,38 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bluebird/1.2.2/bluebird.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="src/style.css"></link>
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+
+    <script type="text/javascript" src="src/js/SearchView.js" defer></script>
+    <script type="text/javascript" src="src/js/ResultsView.js" defer></script>
+    <script type="text/javascript" src="src/js/searchController.js" defer></script>
+    <script type="text/javascript" src="src/js/main.js" defer></script>
+
 </head>
 <body>
-    <search-view params='viewModel: searchView'></search-view>
+    <search-view params="viewModel: searchView"></search-view>
     
-    <hr />
+    <hr>
 
-    <results-view params='viewModel: resultsView'></results-view>
+    <results-view params="viewModel: resultsView"></results-view>
 
-    <script type="text/javascript" src="src/js/SearchView.js"></script>
-    <script type="text/javascript" src="src/js/ResultsView.js"></script>
-    <script type="text/javascript" src="src/js/searchController.js"></script>
-    <script type="text/javascript" src="src/js/main.js"></script>
+    <!-- don't edit directly; templates inserted by gulp -->
+    <div id="templates">        
+        <template id="resultsItem">
+            <span>
+                <a data-bind="text: title, attr: {href: url}" target="_blank"></a>
+            </span>
+        </template>
+        <template id="resultsView">
+            <div data-bind="foreach: results">
+                <results-item params="viewModel: $data">
+            </results-item></div>
+        </template>
+        <template id="searchView">
+            <label for="searchText">Search Text: </label>
+            <input id="searchText" type="text" data-bind="textInput: searchText">
+        </template>
+        
+    </div>
 </body>
 </html>

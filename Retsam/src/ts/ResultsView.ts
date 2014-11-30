@@ -33,7 +33,9 @@ ko.components.register('results-view', {
             return params.viewModel;
         }
     },
-    template: "<div data-bind='foreach: results'><results-item params='viewModel: $data'></results></div>"
+    template: {
+        element: "resultsView"
+    }
 });
 
 ko.components.register('results-item', {
@@ -42,5 +44,7 @@ ko.components.register('results-item', {
             return params.viewModel;
         }
     },
-    template: "<a data-bind='text: title, attr: {href: url}' target='_blank'></span>"
+    template: {
+        element: "resultsItem"
+    }
 });

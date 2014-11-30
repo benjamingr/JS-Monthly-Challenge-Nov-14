@@ -25,5 +25,7 @@ ko.components.register('search-view', {
             return params.viewModel;
         }
     },
-    template: "<label for='searchText'>Search Text: </label><input id='searchText' type='text' data-bind='textInput: searchText'></input>"
+    template: {
+        element: "searchView"
+    }
 });
