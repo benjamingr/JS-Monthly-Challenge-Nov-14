@@ -1,7 +1,10 @@
 JS Monthly Challenge Nov 14
 ===========================
 
-Submissions are due by Dec 1st. 
+Challenge is done - the winner by a fair and transparent voting process is Zirak with 15322 votes*, it was a close call.
+
+
+(*) not really
 
 ###What's this about
 
