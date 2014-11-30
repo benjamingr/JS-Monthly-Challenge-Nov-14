@@ -1,0 +1,46 @@
+results-item {
+    display: block;
+    padding: 2px 0 10px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+results-item:nth-child(2n) {
+    background-color: #eeeeee;
+}
+
+results-item:hover {
+    background-color: #dddddd;
+}
+
+.results-item-title {
+    font-weight: bold;
+}
+
+.results-item-excerpt {
+    padding-left: 8px;
+}
+
+.results-item-tags {
+    margin-top: 5px;
+}
+
+.tag {
+    background-color: #e0eaf1;
+    font-size: 80%;
+    padding: 5px;
+    box-shadow: 2px 2px #c4dae9;
+    cursor: pointer;
+}
+
+.tag:hover {
+    background-color: #c4dae9;
+}
+
+.search-view-tags {
+    margin-right:  5px;
+}
+
+.search-view-add-tags {
+    display: inline;
+}

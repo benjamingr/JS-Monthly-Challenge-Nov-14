@@ -1,0 +1,13 @@
+<template id="resultsItem">
+    <div data-bind="click: navigate">
+        <div class="results-item-title" data-bind='text: title'></div>
+        <div class="results-item-excerpt" data-bind='html: excerpt'></div>
+        <div class="results-item-tags" data-bind="foreach: tags">
+            <span class="tag" data-bind="
+                text: $data, 
+                click:$parent.tagClicked,
+                clickBubble: false
+            "></span>
+        </div>
+    </div>
+</template>

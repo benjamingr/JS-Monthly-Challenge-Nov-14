@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StackOverflow Searcher</title>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bluebird/1.2.2/bluebird.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+
+    <script type="text/javascript" src="src/js/SearchView.js" defer></script>
+    <script type="text/javascript" src="src/js/ResultsView.js" defer></script>
+    <script type="text/javascript" src="src/js/searchController.js" defer></script>
+    <script type="text/javascript" src="src/js/main.js" defer></script>
+
+</head>
+<body>
+    <search-view params="viewModel: searchView"></search-view>
+    
+    <hr>
+
+    <results-view params="viewModel: resultsView"></results-view>
+
+    <!-- don't edit directly; templates inserted by gulp -->
+    <div id="templates">        
+        <template id="resultsItem">
+            <div data-bind="click: navigate">
+                <div class="results-item-title" data-bind="text: title"></div>
+                <div class="results-item-excerpt" data-bind="html: excerpt"></div>
+                <div class="results-item-tags" data-bind="foreach: tags">
+                    <span class="tag" data-bind="
+                        text: $data, 
+                        click:$parent.tagClicked,
+                        clickBubble: false
+                    "></span>
+                </div>
+            </div>
+        </template>
+        <template id="resultsView">
+            <div data-bind="foreach: results">
+                <results-item params="viewModel: $data">
+            </results-item></div>
+        </template>
+        <template id="searchView">
+            <label for="searchText">Search Text: </label>
+            <input id="searchText" type="text" data-bind="textInput: searchText">
+        
+            <form class="search-view-add-tags" data-bind="submit: addTag">
+                <label for="searchTags">Tags: </label>
+                <span class="search-view-tags" data-bind="foreach: tags">
+                    <span class="tag" data-bind="
+                        text: $data,
+                        click: $parent.tagClicked
+                    "></span>
+                </span>
+                <input id="searchTags" type="text" data-bind="textInput: newTagName" placeholder="Add Tag">
+            </form>
+        </template>
+        
+    </div>
+</body>
+</html>
