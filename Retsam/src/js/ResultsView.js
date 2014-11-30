@@ -19,6 +19,11 @@ var ResultsItem = (function () {
         self.navigate = function () {
             window.open(url, '_blank');
         };
+        self.tags = resultData.tags;
+        self.tagClicked = function (tag) {
+            var url = "http://stackoverflow.com/tags/" + tag + "/info";
+            window.open(url, '_blank');
+        };
     }
     return ResultsItem;
 })();

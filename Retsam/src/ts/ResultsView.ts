@@ -20,6 +20,9 @@ class ResultsItem {
     title: string;
     excerpt: string;
     navigate: () => void;
+    tagClicked: (string) => void;
+    tags: string[];
+
     constructor(resultData) {
         var self = this;
 
@@ -29,6 +32,13 @@ class ResultsItem {
         self.excerpt = resultData.excerpt;
 
         self.navigate = function () {
+            window.open(url,'_blank');
+        }
+
+        self.tags = resultData.tags;
+
+        self.tagClicked = function (tag) {
+            var url = "http://stackoverflow.com/tags/"+tag+"/info";
             window.open(url,'_blank');
         }
     }
